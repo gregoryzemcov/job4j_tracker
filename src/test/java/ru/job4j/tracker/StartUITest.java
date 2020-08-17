@@ -26,9 +26,9 @@ public class StartUITest {
     }
 	@Test
 	public void whenPrtMenu() {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		PrintStream def = System.out;
-		System.setOut(new PrintStream(out));
+		//ByteArrayOutputStream out = new ByteArrayOutputStream();
+		//PrintStream def = System.out;
+		//System.setOut(new PrintStream(out));
 		StubInput input = new StubInput(new String[] {"0"});
 		StubAction action = new StubAction();
 		Output output = new StubOutput();
@@ -37,8 +37,8 @@ public class StartUITest {
 				.add("Menu.")
 				.add("0. Stub action")
 				.toString();
-		assertThat(new String(out.toByteArray()), is(expect));
-		System.setOut(def);
+		assertThat(new String(output.toString()), is(expect));
+		//System.setOut(def);
 	}
 	@Test
 	public void whenCreateItem() {
@@ -55,19 +55,22 @@ public class StartUITest {
     @Test
     public void whenReplaceItem() {
         Tracker tracker = new Tracker();
+        Output output = new StubOutput() {
+            @Override
+            public void println(Object obj) { }
+        };
         Item item = tracker.add(new Item("Replaced item"));
         /* Входные данные должны содержать ID добавленной заявки item.getId() */
         String replacedName = "New item name";
         Input in = new StubInput(
-                new String[] {"2", item.getId(), "1"}
+                new String[] {"0", item.getId(), replacedName, "1"}
         );
-        Output output = new StubOutput();
         UserAction[] actions = {
                 new ReplaceAction(),
                 new ExitAction()
         };
         new StartUI(output).init(in, tracker, actions);
-        assertThat(tracker.findById(item.getId()), is(replacedName));
+        assertThat(tracker.findById(item.getId()).getName(), is(replacedName));
     }
 
     @Test
@@ -76,7 +79,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("Deleted item"));
         /* Входные данные должны содержать ID добавленной заявки item.getId() */
         Input in = new StubInput(
-                new String[] {"3", item.getId(), "1"}
+                new String[] {"0", item.getId(), "1"}
         );
         Output output = new StubOutput();
         UserAction[] actions = {
