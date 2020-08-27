@@ -98,10 +98,9 @@ public class StartUITest {
                 new FindAllAction(),
                 new ExitAction()
         };
-        String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                .add("item 1")
-                .add("item 2")
-                .toString();
+        Item[] expect = new Item[2];
+        expect[0] = items[0];
+        expect[1] = items[2];
         new StartUI(output).init(input, tracker, actions);
         assertThat(tracker.findAll(), is(expect));
     }
@@ -129,7 +128,7 @@ public class StartUITest {
                 tracker.add(new Item("item 1")),
                 tracker.add(new Item("item 2")),
                 tracker.add(new Item("item 3")),
-                tracker.add(new Item("item 4"))
+                tracker.add(new Item("item 1"))
         };
         Input input = new StubInput(new String[] {"0", items.toString(), "1"});
         UserAction[] actions = {
@@ -137,9 +136,10 @@ public class StartUITest {
                 new ExitAction()
         };
         String key = "item 1";
-        String expect = items[0].getName();
+        Item[] expect = new Item[2];
+        expect[0] = items[0];
+        expect[1] = items[3];
         new StartUI(output).init(input, tracker, actions);
-        tracker.findByName(key);
         assertThat(tracker.findByName(key), is(expect));
     }
 }
