@@ -4,6 +4,7 @@ package ru.job4j.tracker;
 import java.util.StringJoiner;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
 import ru.job4j.tracker.start.*;
@@ -93,16 +94,24 @@ public class StartUITest {
                 tracker.add(new Item("item 2")),
                 tracker.add(new Item(null))
         };
-        Input input = new StubInput(new String[] {"0", items.toString(), "1"});
+        Input input = new StubInput(new String[] {"0", "1"});
         UserAction[] actions = {
-                new FindAllAction(),
+                new FindAllAction(output),
                 new ExitAction()
         };
-        Item[] expect = new Item[2];
-        expect[0] = items[0];
-        expect[1] = items[2];
+        StringJoiner expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator());
+        expect.add("Menu");
+        expect.add("0. == Show all items ==");
+        expect.add("1. Exit");
+        expect.add(String.format("%s, %s", items[0].getId(), items[0].getName()));
+        expect.add(String.format("%s, %s", items[1].getId(), items[1].getName()));
+        expect.add(String.format("%s, %s", items[2].getId(), items[2].getName()));
+        expect.add(String.format("%s, %s", items[3].getId(), items[3].getName()));
+        expect.add("Menu");
+        expect.add("0. == Show all items ==");
+        expect.add("1. Exit");
         new StartUI(output).init(input, tracker, actions);
-        assertThat(tracker.findAll(), is(expect));
+        assertEquals(expect.toString(), output.toString());
     }
     @Test
     public void whenFindByIdItems() {

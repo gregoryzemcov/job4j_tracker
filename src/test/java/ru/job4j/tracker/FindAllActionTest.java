@@ -20,9 +20,10 @@ public class FindAllActionTest {
         PrintStream def = System.out;
         System.setOut(new PrintStream(out));
         Tracker tracker = new Tracker();
+        Output output = new StubOutput();
         Item item = new Item("fix bug");
         tracker.add(item);
-        FindAllAction act = new FindAllAction();
+        FindAllAction act = new FindAllAction(output);
         act.execute(new StubInput(new String[] {}), tracker);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add(item.getId() + " " + item.getName())

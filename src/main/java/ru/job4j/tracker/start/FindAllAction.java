@@ -7,6 +7,10 @@ import ru.job4j.tracker.models.*;
  * @since 17.02.2020.
  */
 public class FindAllAction implements UserAction {
+    private Output output;
+    public FindAllAction (Output output) {
+        this.output = output;
+    }
     @Override
     public String name() {
         return "== Show all items ==";
