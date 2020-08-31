@@ -100,14 +100,14 @@ public class StartUITest {
                 new ExitAction()
         };
         StringJoiner expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator());
-        expect.add("Menu");
+        expect.add("Menu.");
         expect.add("0. == Show all items ==");
         expect.add("1. Exit");
-        expect.add(String.format("%s, %s", items[0].getId(), items[0].getName()));
-        expect.add(String.format("%s, %s", items[1].getId(), items[1].getName()));
-        expect.add(String.format("%s, %s", items[2].getId(), items[2].getName()));
-        expect.add(String.format("%s, %s", items[3].getId(), items[3].getName()));
-        expect.add("Menu");
+        expect.add(String.format("%s %s", items[0].getId(), items[0].getName()));
+        expect.add(String.format("%s %s", items[1].getId(), items[1].getName()));
+        expect.add(String.format("%s %s", items[2].getId(), items[2].getName()));
+        expect.add(String.format("%s %s", items[3].getId(), items[3].getName()));
+        expect.add("Menu.");
         expect.add("0. == Show all items ==");
         expect.add("1. Exit");
         new StartUI(output).init(input, tracker, actions);
