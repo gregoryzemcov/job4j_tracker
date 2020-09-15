@@ -16,9 +16,9 @@ import ru.job4j.tracker.models.*;
 public class FindAllActionTest {
     @Test
     public void whenCheckOutput() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        PrintStream def = System.out;
-        System.setOut(new PrintStream(out));
+        //ByteArrayOutputStream out = new ByteArrayOutputStream();
+        //PrintStream def = System.out;
+        //System.setOut(new PrintStream(out));
         Tracker tracker = new Tracker();
         Output output = new StubOutput();
         Item item = new Item("fix bug");
@@ -28,7 +28,7 @@ public class FindAllActionTest {
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add(item.getId() + " " + item.getName())
                 .toString();
-        assertThat(new String(out.toByteArray()), is(expect));
-        System.setOut(def);
+        assertThat(output.toString(), is(expect));
+        //System.setOut(def);
     }
 }
