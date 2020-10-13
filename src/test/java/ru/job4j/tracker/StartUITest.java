@@ -61,7 +61,7 @@ public class StartUITest {
                 new String[] {"0", item.getId(), replacedName, "1"}
         );
         UserAction[] actions = {
-                new ReplaceAction(),
+                new ReplaceAction(output),
                 new ExitAction()
         };
         new StartUI(output).init(in, tracker, actions);
@@ -78,7 +78,7 @@ public class StartUITest {
         );
         Output output = new StubOutput();
         UserAction[] actions = {
-                new DeleteAction(),
+                new DeleteAction(output),
                 new ExitAction()
         };
         new StartUI(output).init(in, tracker, actions);
@@ -123,7 +123,7 @@ public class StartUITest {
         tracker.add(item2);
         Input input = new StubInput(new String[] {"0", item2.getId(), "1"});
         UserAction[] actions = {
-                new FindByIdAction(),
+                new FindByIdAction(output),
                 new ExitAction()
         };
         new StartUI(output).init(input, tracker, actions);
@@ -141,7 +141,7 @@ public class StartUITest {
         };
         Input input = new StubInput(new String[] {"0", items.toString(), "1"});
         UserAction[] actions = {
-                new FindByNameAction(),
+                new FindByNameAction(output),
                 new ExitAction()
         };
         String key = "item 1";

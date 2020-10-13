@@ -16,18 +16,19 @@ import ru.job4j.tracker.models.*;
 public class FindByNameActionTest {
     @Test
     public void whenCheckOutputName() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        PrintStream def = System.out;
-        System.setOut(new PrintStream(out));
+        //ByteArrayOutputStream out = new ByteArrayOutputStream();
+        //PrintStream def = System.out;
+        //System.setOut(new PrintStream(out));
+		Output out = new StubOutput();
 		Tracker tracker = new Tracker();
 		Item item = new Item("Petr");
 		tracker.add(item);
-		FindByNameAction act = new FindByNameAction();
+		FindByNameAction act = new FindByNameAction(out);
 		act.execute(new StubInput(new String[] {"Petr"}), tracker);
 		String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
 			.add(item.getId() + " " + item.getName())
 			.toString();
-		assertThat(new String(out.toByteArray()), is(expect));
-		System.setOut(def);
+		assertThat(new String(out.toString()), is(expect));
+		//System.setOut(def);
     }
 }

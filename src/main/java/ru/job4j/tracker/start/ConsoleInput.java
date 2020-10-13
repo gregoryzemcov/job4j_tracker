@@ -7,10 +7,14 @@ import java.util.Scanner;
  * @since 19.10.2019.
  */
 public class ConsoleInput implements Input {
+	private final Output output;
 	private Scanner scanner = new Scanner(System.in);
+	public ConsoleInput(Output output) {
+		this.output = output;
+	}
 	@Override
 	public String askStr(String question) {
-		System.out.print(question);
+		output.println(question);
 		return scanner.nextLine();
 	}
 	@Override
