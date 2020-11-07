@@ -11,21 +11,8 @@ public class ValidateInputTest {
         Input in = new StubInput( new String[] {"one", "1"});
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
+        String output = String.format("Enter menu:%n" + "Please enter validate data again.%n" + "Enter menu:");
+        assertThat(output.toString(), is(output));
         assertThat(selected, is(1));
-    }
-    @Test
-    public void whenValidInput() {
-        Output out = new StubOutput();
-        Input in = new StubInput( new String[] {"1"});
-        ValidateInput input = new ValidateInput(out, in);
-        int selected = input.askInt("Enter menu:");
-        assertThat(selected, is(1));
-    }
-    @Test
-    public void whenValidOutput() {
-        Output out = new StubOutput();
-        Input in = new StubInput( new String[] {"one"});
-        ValidateInput input = new ValidateInput(out, in);
-        assertThat(input.toString(), is("one"));
     }
 }
