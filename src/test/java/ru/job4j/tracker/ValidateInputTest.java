@@ -4,6 +4,12 @@ import ru.job4j.tracker.start.*;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+/**
+ * Тест проверки класса ValidateInput.
+ * @author Gregory Zemtsov (griffondark@gmail.com).
+ * @version $Id$.
+ * @since 30.10.2020.
+ */
 public class ValidateInputTest {
     @Test
     public void whenInvalidInput() {
