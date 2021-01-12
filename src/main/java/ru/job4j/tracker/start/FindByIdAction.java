@@ -6,13 +6,17 @@ package ru.job4j.tracker.start;
  * @since 17.02.2020.
  */
 public class FindByIdAction implements UserAction {
+    private final Output out;
+    public FindByIdAction(Output out) {
+        this.out = out;
+    }
     @Override
     public String name() {
         return "== Find item by Id ==";
     }
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        System.out.print("Enter id: ");
+        out.println("Enter id: ");
         String id = input.askStr(" ");
         tracker.findById(id);
         return true;

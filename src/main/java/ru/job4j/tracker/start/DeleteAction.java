@@ -6,13 +6,17 @@ package ru.job4j.tracker.start;
  * @since 17.02.2020.
  */
 public class DeleteAction implements UserAction {
+    private final Output out;
+    public DeleteAction(Output out) {
+        this.out = out;
+    }
     @Override
     public String name() {
         return "== Delete item ==";
     }
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        System.out.print("Enter id: ");
+        out.println("Enter id: ");
         String id = input.askStr(" ");
         tracker.delete(id);
         return true;

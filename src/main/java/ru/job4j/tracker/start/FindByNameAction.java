@@ -7,6 +7,10 @@ import ru.job4j.tracker.models.Item;
  * @since 17.02.2020.
  */
 public class FindByNameAction implements UserAction {
+    private final Output out;
+    public FindByNameAction(Output out) {
+        this.out = out;
+    }
     @Override
     public String name() {
         return "== Find items by name ==";
@@ -16,7 +20,7 @@ public class FindByNameAction implements UserAction {
         //System.out.print("Enter name: ");
         String name = input.askStr(" ");
         for (Item item : tracker.findByName(name)) {
-            System.out.println(String.format("%s %s", item.getId(), item.getName()));
+            out.println(String.format("%s %s", item.getId(), item.getName()));
         }
         return true;
     }
