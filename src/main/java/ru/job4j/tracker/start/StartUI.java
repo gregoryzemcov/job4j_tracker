@@ -1,5 +1,5 @@
 package ru.job4j.tracker.start;
-import ru.job4j.tracker.models.*;
+//import ru.job4j.tracker.models.*;
 /**
  * Класс интерфейса StartUI.
  * @author Gregory Zemtsov (griffondark@gmail.com).
@@ -33,6 +33,7 @@ public class StartUI {
     public static void main(String[] args) {
 		Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput(output));
+        SingleTracker single = SingleTracker.getInstance();
         Tracker tracker = new Tracker();
         UserAction[] actions = {new CreateAction(output), new ExitAction(), new ReplaceAction(output)};
         new StartUI(output).init(input, tracker, actions);
