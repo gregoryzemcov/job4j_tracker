@@ -2,7 +2,7 @@ package ru.job4j.oop;
 
 public class Ball {
 
-    String name = "Колобок";
+    private String name = "Колобок";
 
     public void tryRun(boolean condition) {
         if (condition) {
