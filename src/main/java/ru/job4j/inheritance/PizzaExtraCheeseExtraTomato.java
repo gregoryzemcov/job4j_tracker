@@ -9,7 +9,7 @@ public class PizzaExtraCheeseExtraTomato extends PizzaExtraCheese {
 
     @Override
     public String name() {
-        return "Just tasty pizza with cheese and tomato";
+        return super.name() + " with cheese and tomato";
     }
 
     @Override
