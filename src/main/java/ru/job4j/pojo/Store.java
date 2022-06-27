@@ -5,26 +5,30 @@ public class Store {
         Product milk = new Product("Milk", 10);
         Product bread = new Product("Bread", 4);
         Product egg = new Product("Egg", 19);
-        Product[] prods = new Product[3];
-        prods[0] = milk;
-        prods[1] = bread;
-        prods[2] = egg;
+        Product[] products = new Product[5];
+        products[0] = milk;
+        products[1] = bread;
+        products[2] = egg;
 
-        for (Product pr : prods) {
-            System.out.println(pr.getName() + " - " + pr.getCount());
+        for (Product pr : products) {
+            if (pr != null) {
+                System.out.println(pr.getName() + " - " + pr.getCount());
+            }
         }
 
         System.out.println("Replace milk to oil.");
         Product oil = new Product("Oil", 11);
-        prods[0] = oil;
+        products[0] = oil;
 
-        for (Product pr : prods) {
-            System.out.println(pr.getName() + " - " + pr.getCount());
+        for (Product pr : products) {
+            if (pr != null) {
+                System.out.println(pr.getName() + " - " + pr.getCount());
+            }
         }
 
         System.out.println("Shown only product.count > 10");
 
-        for (Product pr : prods) {
+        for (Product pr : products) {
             if (pr.getCount() > 10) {
                 System.out.println(pr.getName() + " - " + pr.getCount());
             }
