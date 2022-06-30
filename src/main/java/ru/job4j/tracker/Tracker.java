@@ -35,14 +35,14 @@ public class Tracker {
     }
 
     public boolean replace(int id, Item item) {
-        for (int i = 0; i <= indexOf(id); i++) {
-            if (this.items[i].getId() == id) {
-                items[i] = item;
-                item.setId(id);
-                break;
-            }
+        boolean rsl = false;
+        int index = indexOf(id);
+        if (index != -1) {
+            item.setId(id);
+            items[index] = item;
+            rsl = true;
         }
-        return true;
+        return rsl;
     }
 
     private int indexOf(int id) {
