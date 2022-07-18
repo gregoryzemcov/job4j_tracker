@@ -15,6 +15,7 @@ public class Matches {
             if (matches <= count && matches < 4 && matches > 0) {
                 count = count - matches;
                 turn = !turn;
+                System.out.println("Осталось спичек: " + count);
             } else {
                 System.out.println("Укажите меньшее число спичек.");
             }
