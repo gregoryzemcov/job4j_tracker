@@ -8,8 +8,8 @@ public class Bus implements Transport {
 
     @Override
     public int passInt(int pass) {
-        int count = 0, fullPass = 30;
-        while (count < fullPass) {
+        int count = 0;
+        while (count < 30) {
             count += pass;
         }
         return count;
