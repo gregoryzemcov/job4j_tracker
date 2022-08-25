@@ -27,7 +27,7 @@ class StartUITest {
         /* Входные данные должны содержать ID добавленной заявки item.getId() */
         String replacedName = "New item name";
         Input in = new StubInput(
-                new String[] {"0" /* входные параметры для ReplaceAction */, "1"}
+                new String[] {"0", String.valueOf(item.getId()), replacedName /* входные параметры для ReplaceAction */, "1"}
         );
         UserAction[] actions = {
                 new EditAction(),
@@ -44,7 +44,7 @@ class StartUITest {
         Item item = tracker.add(new Item("Deleted item"));
         /* Входные данные должны содержать ID добавленной заявки item.getId() */
         Input in = new StubInput(
-                new String[] {"0" /* входные параметры для DeleteAction */, "1"}
+                new String[] {"0", String.valueOf(item.getId()) /* входные параметры для DeleteAction */, "1"}
         );
         UserAction[] actions = {
                 new DeleteAction(),
