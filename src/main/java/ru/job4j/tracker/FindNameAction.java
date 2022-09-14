@@ -24,6 +24,6 @@ public class FindNameAction implements UserAction {
         } else {
             out.println("Заявки с именем: " + name + " не найдены.");
         }
-        return false;
+        return true;
     }
 }
