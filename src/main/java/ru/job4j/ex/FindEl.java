@@ -11,6 +11,9 @@ public class FindEl {
                 break;
             }
         }
+        if (rsl == -1) {
+            throw new ElementNotFoundException("This element not found");
+        }
         return rsl;
     }
 
