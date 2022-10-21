@@ -12,9 +12,28 @@ public class FindEl {
             }
         }
         if (rsl == -1) {
-            throw new ElementNotFoundException("This element not found");
+            throw new ElementNotFoundException("This element not found.");
         }
         return rsl;
+    }
+
+    public static boolean sent(String value, String[] abuses) throws ElementAbuseException {
+        for (String s : abuses) {
+            if (s.equals(value)) {
+                throw new ElementAbuseException("This forbidden element.");
+            }
+        }
+        return true;
+    }
+
+    public static void process(String[] values, String key, String[] abuses) {
+        try {
+            if (indexOf(values, key) != -1) {
+                sent(key, abuses);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
