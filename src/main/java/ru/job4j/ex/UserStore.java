@@ -8,6 +8,7 @@ public class UserStore {
         for (User value : users) {
             if (Objects.equals(value.getUsername(), login)) {
                 user = value;
+                break;
             }
         }
             if (user == null) {
