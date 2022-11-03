@@ -30,11 +30,15 @@ public class ValidateInputTest {
     public void whenMultipleInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"0", "4"}
+                new String[] {"0", "1", "4"}
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
         assertThat(selected).isEqualTo(0);
+        int selected1 = input.askInt("Enter menu:");
+        assertThat(selected1).isEqualTo(1);
+        int selected2 = input.askInt("Enter menu:");
+        assertThat(selected2).isEqualTo(4);
     }
 
     @Test
@@ -45,6 +49,6 @@ public class ValidateInputTest {
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
-        assertThat(selected).isEqualTo("Please enter validate data again.");
+        assertThat(selected).isEqualTo(-3);
     }
 }
