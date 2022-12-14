@@ -3,7 +3,6 @@ package ru.job4j.early;
 public class PasswordValidator {
 
     public static String validate(String password) {
-        String specialChar = "[!@#$%&*()_+=|<>?{}\\[\\]~-]";
 
         if (password == null) {
             throw new IllegalArgumentException("Password can't be null");
@@ -27,7 +26,7 @@ public class PasswordValidator {
                 throw new IllegalArgumentException("Password should contain at least one lowercase letter");
             } else if (!Character.isDigit(c)) {
                 throw new IllegalArgumentException("Password should contain at least one figure");
-            } else if (!Character.isLetterOrDigit(c)) {
+            } else if (!Character.isSupplementaryCodePoint(c)) {
                 throw new IllegalArgumentException("Password should contain at least one special symbol");
             }
         }
@@ -35,3 +34,4 @@ public class PasswordValidator {
         return password;
     }
 }
+
