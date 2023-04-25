@@ -2,11 +2,16 @@ package ru.job4j.early;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 public class PasswordValidator {
 
+    @SuppressWarnings("checkstyle:ConstantName")
     public static String validate(String password) {
-        boolean upCase = false, loCase = false, digit = false, supp = false;
-        String[] strings = new String[]{"qwerty", "password", "admin", "user", "12345"};
+        boolean upCase = false;
+        boolean loCase = false;
+        boolean digit = false;
+        boolean supp = false;
+        final String[] strings = new String[]{"qwerty", "password", "admin", "user", "12345"};
 
         if (password == null) {
             throw new IllegalArgumentException("Password can't be null");
@@ -33,13 +38,14 @@ public class PasswordValidator {
                 digit = true;
             }
         }
+
         Pattern p = Pattern.compile("[^A-Za-z0-9]");
         Matcher m = p.matcher(password);
         boolean b = m.find();
+
         if (b) {
             supp = true;
         }
-
         if (!upCase) {
             throw new IllegalArgumentException("Password should contain at least one uppercase letter");
         }
@@ -56,4 +62,3 @@ public class PasswordValidator {
         return password;
     }
 }
-
