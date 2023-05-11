@@ -5,13 +5,14 @@ import java.util.regex.Pattern;
 
 public class PasswordValidator {
 
+    private static final String[] STRINGS = {"qwerty", "password", "admin", "user", "12345"};
+
     @SuppressWarnings("checkstyle:ConstantName")
     public static String validate(String password) {
         boolean upCase = false;
         boolean loCase = false;
         boolean digit = false;
         boolean supp = false;
-        final String[] STRINGS = {"qwerty", "password", "admin", "user", "12345"};
 
         if (password == null) {
             throw new IllegalArgumentException("Password can't be null");
