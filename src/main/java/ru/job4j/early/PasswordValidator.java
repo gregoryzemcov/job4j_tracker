@@ -11,7 +11,7 @@ public class PasswordValidator {
         boolean loCase = false;
         boolean digit = false;
         boolean supp = false;
-        final String[] strings = new String[]{"qwerty", "password", "admin", "user", "12345"};
+        final String[] STRINGS = {"qwerty", "password", "admin", "user", "12345"};
 
         if (password == null) {
             throw new IllegalArgumentException("Password can't be null");
@@ -21,7 +21,7 @@ public class PasswordValidator {
             throw new IllegalArgumentException("Password should be length [8, 32]");
         }
 
-        for (String s : strings) {
+        for (String s : STRINGS) {
             if (password.toLowerCase().contains(s)) {
                 throw new IllegalArgumentException("Password shouldn't contain substrings: qwerty, 12345, password, admin, user");
             }
