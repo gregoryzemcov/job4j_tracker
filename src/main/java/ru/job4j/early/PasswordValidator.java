@@ -1,13 +1,9 @@
 package ru.job4j.early;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class PasswordValidator {
-
     private static final String[] STRINGS = {"qwerty", "password", "admin", "user", "12345"};
 
-    @SuppressWarnings("checkstyle:ConstantName")
+    @SuppressWarnings({"checkstyle:ConstantName", "checkstyle:SimplifyBooleanExpression"})
     public static String validate(String password) {
         boolean upCase = false;
         boolean loCase = false;
@@ -38,15 +34,14 @@ public class PasswordValidator {
             if (Character.isDigit(c)) {
                 digit = true;
             }
+            if (!Character.isUpperCase(c) && !Character.isLowerCase(c) && !Character.isDigit(c)) {
+                supp = true;
+            }
+            if (upCase && loCase && digit && supp) {
+                break;
+            }
         }
 
-        Pattern p = Pattern.compile("[^A-Za-z0-9]");
-        Matcher m = p.matcher(password);
-        boolean b = m.find();
-
-        if (b) {
-            supp = true;
-        }
         if (!upCase) {
             throw new IllegalArgumentException("Password should contain at least one uppercase letter");
         }
