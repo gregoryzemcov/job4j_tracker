@@ -3,7 +3,6 @@ package ru.job4j.early;
 public class PasswordValidator {
     private static final String[] STRINGS = {"qwerty", "password", "admin", "user", "12345"};
 
-    @SuppressWarnings({"checkstyle:ConstantName", "checkstyle:SimplifyBooleanExpression"})
     public static String validate(String password) {
         boolean upCase = false;
         boolean loCase = false;
