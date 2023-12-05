@@ -1,6 +1,5 @@
 package ru.job4j.search;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -25,6 +24,6 @@ public class PhoneDictionaryTest {
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
         ArrayList<Person> persons = phones.find("Kirill");
-        Assert.assertArrayEquals(persons, null);
+        assertThat(persons).isEqualTo(new ArrayList<>());
     }
 }
