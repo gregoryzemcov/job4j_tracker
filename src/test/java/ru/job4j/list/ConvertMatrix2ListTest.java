@@ -6,7 +6,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConvertMatrix2ListTest {
-       @Test
+    @Test
     public void when2on2ArrayThenList4() {
         ConvertMatrix2List list = new ConvertMatrix2List();
         int[][] input = {
