@@ -33,8 +33,10 @@ public class TrackerTest {
         Item second = new Item("Second");
         tracker.add(first);
         tracker.add(second);
-        Item result = tracker.findAll().get(0);
-        assertThat(result.getName(), is(first.getName()));
+        Item resultF = tracker.findAll().get(0);
+        Item resultS = tracker.findAll().get(1);
+        assertThat(resultF.getName(), is(first.getName()));
+        assertThat(resultS.getName(), is(second.getName()));
     }
 
     @Test
