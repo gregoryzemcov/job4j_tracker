@@ -36,8 +36,8 @@ public class TrackerTest {
         Item second = new Item("Second");
         tracker.add(first);
         tracker.add(second);
-        Item result = tracker.findAll().get(0);
-        assertThat(result.getName(), is(first.getName()));
+        List<Item> result = new ArrayList<>(tracker.findAll());
+        assertThat(result.get(0).getName(), is(first.getName()));
     }
 
     @Test
