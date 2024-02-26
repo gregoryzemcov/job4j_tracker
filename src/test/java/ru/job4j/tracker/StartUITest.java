@@ -118,7 +118,7 @@ class StartUITest {
                 new String[] {"0", String.valueOf(one.getId()), "1"}
         );
         List<UserAction> actions = new ArrayList<>();
-        actions.add(new FindAllAction(out));
+        actions.add(new FindIdAction(out));
         actions.add(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();

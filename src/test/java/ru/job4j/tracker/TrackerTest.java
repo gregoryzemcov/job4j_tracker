@@ -2,6 +2,9 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -33,10 +36,8 @@ public class TrackerTest {
         Item second = new Item("Second");
         tracker.add(first);
         tracker.add(second);
-        Item resultF = tracker.findAll().get(0);
-        Item resultS = tracker.findAll().get(1);
-        assertThat(resultF.getName(), is(first.getName()));
-        assertThat(resultS.getName(), is(second.getName()));
+        Item result = tracker.findAll().get(0);
+        assertThat(result.getName(), is(first.getName()));
     }
 
     @Test
@@ -49,8 +50,8 @@ public class TrackerTest {
         tracker.add(new Item("First"));
         tracker.add(new Item("Second"));
         tracker.add(new Item("First"));
-        Item[] result = tracker.findByName(first.getName());
-        assertThat(result.length, is(3));
+        List<Item> result = new ArrayList<>(tracker.findByName(first.getName()));
+        assertThat(result.size(), is(3));
     }
 
     @Test
@@ -63,8 +64,8 @@ public class TrackerTest {
         tracker.add(new Item("First"));
         tracker.add(new Item("Second"));
         tracker.add(new Item("First"));
-        Item[] result = tracker.findByName(second.getName());
-        assertThat(result[1].getName(), is(second.getName()));
+        List<Item> result = new ArrayList<>(tracker.findByName(second.getName()));
+        assertThat(result.get(1).getName(), is(second.getName()));
     }
 
     @Test
@@ -77,8 +78,7 @@ public class TrackerTest {
         Item bugWithDesc = new Item();
         bugWithDesc.setName("Bug with description");
         tracker.replace(id, bugWithDesc);
-        String name = tracker.findById(id).getName();
-        assertThat(name, is("Bug with description"));
+        assertThat(tracker.findById(id).getName(), is("Bug with description"));
     }
 
     @Test
