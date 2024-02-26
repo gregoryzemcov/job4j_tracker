@@ -24,9 +24,9 @@ public class TrackerTest {
     public void whenTestFindById() {
         Tracker tracker = new Tracker();
         Item bug = new Item("Bug");
-        tracker.add(bug);
-        Item result = tracker.findById(bug.getId());
-        assertThat(result.getName(), is(bug.getName()));
+        Item item = tracker.add(bug);
+        Item result = tracker.findById(item.getId());
+        assertThat(result.getName(), is(item.getName()));
     }
 
     @Test
