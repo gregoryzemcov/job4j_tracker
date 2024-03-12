@@ -11,6 +11,6 @@ public class FullSearch {
         for (Task s : tasks) {
             result.add(String.valueOf(s.getNumber()));
         }
-        return Set.copyOf(result);
+        return result;
     }
 }
