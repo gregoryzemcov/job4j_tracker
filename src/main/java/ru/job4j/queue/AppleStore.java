@@ -15,6 +15,7 @@ public class AppleStore {
         for (int i = 0; i < count - 1; i++) {
             queue.poll();
         }
+        assert queue.peek() != null;
         return queue.peek().name();
     }
 
@@ -22,6 +23,7 @@ public class AppleStore {
         for (int i = 0; i < count; i++) {
             queue.poll();
         }
+        assert queue.peek() != null;
         return queue.peek().name();
     }
 }
