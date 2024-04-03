@@ -15,9 +15,10 @@ public class ReconstructPhrase {
     }
 
     private String getEvenElements() {
+        final int size = evenElements.size();
         Deque<Character> stringEven = new LinkedList<>();
         StringBuilder strEven = new StringBuilder();
-        for (int i = 0; i < evenElements.size(); i++) {
+        for (int i = 0; i <= size - 1; i++) {
             Character ch = evenElements.poll();
             if (i % 2 == 0) {
                 stringEven.add(ch);
