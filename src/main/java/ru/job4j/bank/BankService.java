@@ -3,18 +3,13 @@ package ru.job4j.bank;
 import ru.job4j.bank.Account;
 import ru.job4j.bank.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BankService {
     private final Map<User, List<Account>> users = new HashMap<>();
 
     public void addUser(User user) {
-        if (!users.putIfAbsent(user, getAccounts(user))) {
-            users.put(user, new ArrayList<Account>());
-        }
+        users.putIfAbsent(user, new ArrayList<Account>());
     }
 
     public void deleteUser(String passport) {
@@ -22,12 +17,9 @@ public class BankService {
     }
 
     public void addAccount(String passport, Account account) {
-        String requisite = account.getRequisite();
-        double balance = account.getBalance();
         if (users.containsKey(findByPassport(passport))) {
-            if (!account.equals(findByRequisite(passport, requisite))) {
-                account.setRequisite(requisite);
-                account.setBalance(balance);
+            if (!users.get(findByRequisite(passport, account.getRequisite()))) {
+                users.get(findByPassport(passport)).add(account);
             }
         }
     }
@@ -43,13 +35,17 @@ public class BankService {
     }
 
     public Account findByRequisite(String passport, String requisite) {
-        Account account = new Account();
-        if (users.putIfAbsent(findByPassport(passport), getAccounts(user))) {
-                if (users.containsKey(requisite)) {
-                    accounts.add(Account e);
+        Account account = new Account(null, 0);
+        User user = new User(null, null);
+        if (users.containsKey(findByPassport(passport))) {
+            Collection<List<Account>> accounts = users.values();
+            for (Account account1 : accounts) {
+                if (account1.getRequisite().equals(requisite)) {
+                    account = account1;
                 }
             }
-        return accounts;
+        }
+        return account;
     }
 
     public boolean transferMoney(String sourcePassport, String sourceRequisite,

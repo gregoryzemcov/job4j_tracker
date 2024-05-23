@@ -1,6 +1,7 @@
 package ru.job4j.collection;
 
 import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FullSearchTest {
+
     @Test
     public void extractNumber() {
         FullSearch fullSearch = new FullSearch();
