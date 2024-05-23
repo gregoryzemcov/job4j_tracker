@@ -12,7 +12,7 @@ public class BankService {
     private final Map<User, List<Account>> users = new HashMap<>();
 
     public void addUser(User user) {
-        if (!users.putIfAbsent(user.getPassport(), user.getUsername())) {
+        if (!users.putIfAbsent(user, getAccounts(user))) {
             users.put(user, new ArrayList<Account>());
         }
     }
@@ -22,19 +22,20 @@ public class BankService {
     }
 
     public void addAccount(String passport, Account account) {
+        String requisite = account.getRequisite();
+        double balance = account.getBalance();
         if (users.containsKey(findByPassport(passport))) {
-            if (account != null && account.equals(findByRequisite(passport, users.get(new User())))) {
-                Account account = new ArrayList<Account>();
-                account.setRequisite();
-                account.setBalance();
+            if (!account.equals(findByRequisite(passport, requisite))) {
+                account.setRequisite(requisite);
+                account.setBalance(balance);
             }
         }
     }
 
     public User findByPassport(String passport) {
-        User user = null;
+        User user = new User(null, null);
         for (User u : users.keySet()) {
-            if (users.containsKey(passport)) {
+            if (u.getPassport().equals(passport)) {
                 user = u;
             }
         }
@@ -42,10 +43,13 @@ public class BankService {
     }
 
     public Account findByRequisite(String passport, String requisite) {
-        for (User user : users) {
-            user.getPassport(passport).getRequisite(requisite);
-        }
-        return get.;
+        Account account = new Account();
+        if (users.putIfAbsent(findByPassport(passport), getAccounts(user))) {
+                if (users.containsKey(requisite)) {
+                    accounts.add(Account e);
+                }
+            }
+        return accounts;
     }
 
     public boolean transferMoney(String sourcePassport, String sourceRequisite,
