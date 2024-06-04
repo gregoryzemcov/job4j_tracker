@@ -3,7 +3,10 @@ package ru.job4j.bank;
 import ru.job4j.bank.Account;
 import ru.job4j.bank.User;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ArrayList;
 
 public class BankService {
     private final Map<User, List<Account>> users = new HashMap<>();
@@ -13,13 +16,17 @@ public class BankService {
     }
 
     public void deleteUser(String passport) {
-        users.remove(findByPassport(passport));
+        users.remove(new User(passport, ""));
     }
 
     public void addAccount(String passport, Account account) {
-        if (users.containsKey(findByPassport(passport))) {
-            if (!users.get(findByRequisite(passport, account.getRequisite()))) {
-                users.get(findByPassport(passport)).add(account);
+        if (users.get(findByPassport(passport)) != null) {
+            for (User user : users.keySet()) {
+                if (user.getPassport().equals(passport)) {
+                    if (!getAccounts(user).contains(account)) {
+                        getAccounts(user).add(account);
+                    }
+                }
             }
         }
     }
@@ -29,23 +36,24 @@ public class BankService {
         for (User u : users.keySet()) {
             if (u.getPassport().equals(passport)) {
                 user = u;
+                break;
             }
         }
         return user;
     }
 
     public Account findByRequisite(String passport, String requisite) {
-        Account account = new Account(null, 0);
-        User user = new User(null, null);
-        if (users.containsKey(findByPassport(passport))) {
-            Collection<List<Account>> accounts = users.values();
-            for (Account account1 : accounts) {
-                if (account1.getRequisite().equals(requisite)) {
-                    account = account1;
+        Account account1 = new Account(null, 0);
+        for (User user : users.keySet()) {
+            if (user.getPassport().equals(passport) && user.getPassport() != null) {
+                for (Account account : getAccounts(user)) {
+                    if (account.getRequisite().contains(requisite)) {
+                        account1 = account;
+                    }
                 }
             }
         }
-        return account;
+        return account1;
     }
 
     public boolean transferMoney(String sourcePassport, String sourceRequisite,
