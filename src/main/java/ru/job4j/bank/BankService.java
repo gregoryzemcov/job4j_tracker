@@ -45,6 +45,7 @@ public class BankService {
             for (Account account : accounts) {
                 if (account.getRequisite().equals(requisite)) {
                     account1 = account;
+                    break;
                 }
             }
         }
@@ -58,12 +59,8 @@ public class BankService {
         Account account1 = findByRequisite(sourcePassport, sourceRequisite);
         Account account2 = findByRequisite(destinationPassport, destinationRequisite);
         if (account1 != null && account1.getBalance() >= amount && account2 != null) {
-            double a = account1.getBalance();
-            a -= amount;
-            account1.setBalance(a);
-            double b = account2.getBalance();
-            b += amount;
-            account2.setBalance(b);
+            account1.setBalance(account1.getBalance() - amount);
+            account2.setBalance(account2.getBalance() + amount);
             result = true;
         }
         return result;
