@@ -2,8 +2,13 @@ package ru.job4j.hashmap;
 
 import java.util.*;
 
-import static java.util.Comparator.naturalOrder;
-
+/** Класс определяет:
+ * Общий средний балл averageScore
+ * Средний балл по каждому ученику averageScoreByPupil
+ * Средний балл по каждому предмету averageScoreBySubject
+ * Лучшего ученика с наибольшим суммарным баллом по всем предметам bestStudent
+ * Предмет с наибольшим баллом для всех студентов bestSubject
+ */
 public class AnalyzeByMap {
     public static double averageScore(List<Pupil> pupils) {
         double result = 0.0, resultScore;
@@ -36,7 +41,29 @@ public class AnalyzeByMap {
 
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
         Map<String, Integer> map = new LinkedHashMap<>();
-        return List.of();
+        String name = "";
+        int number = 0, resultScore;
+        double result = 0.0;
+        for (Pupil pupil : pupils) {
+            for (Subject sub : pupil.subjects()) {
+                name = sub.name();
+                double res = sub.score();
+                result += res;
+            }
+            number++;
+            resultScore = (int) result;
+            map.put(name, resultScore);
+            result = 0;
+        }
+        resultScore = (int) result / number;
+        List<Label> lab = new ArrayList<>();
+        for (String sub : map.keySet()) {
+            if (sub.equals(name)) {
+                Label subScore = new Label(name, resultScore);
+                lab.add(subScore);
+            }
+        }
+        return lab;
     }
 
     public static Label bestStudent(List<Pupil> pupils) {
@@ -55,6 +82,7 @@ public class AnalyzeByMap {
     }
 
     public static Label bestSubject(List<Pupil> pupils) {
+        Map<String, Integer> map = new LinkedHashMap<>();
         return null;
     }
 }
