@@ -41,27 +41,26 @@ public class AnalyzeByMap {
 
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
         Map<String, Integer> map = new LinkedHashMap<>();
-        String name = "";
-        int number = 0, resultScore;
-        double result = 0.0;
+        int number = 0, result;
         for (Pupil pupil : pupils) {
             for (Subject sub : pupil.subjects()) {
-                name = sub.name();
-                double res = sub.score();
-                result += res;
+                int var = 0;
+                String name = sub.name();
+                for (Map.Entry<String, Integer> m : map.entrySet()) {
+                    if (m.getKey().equals(sub.name())) {
+                        var = m.getValue();
+                    }
+                }
+                result = var + sub.score();
+                map.put(name, result);
             }
             number++;
-            resultScore = (int) result;
-            map.put(name, resultScore);
-            result = 0;
         }
-        resultScore = (int) result / number;
         List<Label> lab = new ArrayList<>();
-        for (String sub : map.keySet()) {
-            if (sub.equals(name)) {
-                Label subScore = new Label(name, resultScore);
+        for (Map.Entry<String, Integer> m : map.entrySet()) {
+                int var = m.getValue() / number;
+                Label subScore = new Label(m.getKey(), var);
                 lab.add(subScore);
-            }
         }
         return lab;
     }
@@ -83,6 +82,27 @@ public class AnalyzeByMap {
 
     public static Label bestSubject(List<Pupil> pupils) {
         Map<String, Integer> map = new LinkedHashMap<>();
-        return null;
+        int result;
+        for (Pupil pupil : pupils) {
+            for (Subject sub : pupil.subjects()) {
+                int var = 0;
+                String name = sub.name();
+                for (Map.Entry<String, Integer> m : map.entrySet()) {
+                    if (m.getKey().equals(sub.name())) {
+                        var = m.getValue();
+                    }
+                }
+                result = var + sub.score();
+                map.put(name, result);
+            }
+        }
+        List<Label> lab = new ArrayList<>();
+        for (Map.Entry<String, Integer> m : map.entrySet()) {
+            int var = m.getValue();
+            Label subScore = new Label(m.getKey(), var);
+            lab.add(subScore);
+        }
+        lab.sort(Comparator.naturalOrder());
+        return lab.get(pupils.size() - 1);
     }
 }
