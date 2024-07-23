@@ -54,7 +54,7 @@ public class Item {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass() || !getName().equals(((Item) o).getName())) {
             return false;
         }
         Item item = (Item) o;
