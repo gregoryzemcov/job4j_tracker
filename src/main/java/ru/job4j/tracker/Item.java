@@ -54,15 +54,15 @@ public class Item {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass() || !getName().equals(((Item) o).getName())) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         Item item = (Item) o;
-        return Objects.equals(item.getId(), this.id);
+        return Objects.equals(item.getId(), this.id) && Objects.equals(item.getName(), this.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getName());
     }
 }
